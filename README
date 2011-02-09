@@ -1,0 +1,8 @@
+= Mozilla Skywriter
+
+Radiant extension to accommodate Mozilla SkyWriter.
+
+Few things to note about this;
+
+1) Due to an incompatibility between SkyWriter and Prototype 1.6.1, this extension will upgrade prototype to edge
+2) This extension also replaces the application layout for admin, to place a link tag in the head

@@ -1,0 +1,36 @@
+- @javascripts << ["/ace/src/ace.js", "/ace/src/theme-twilight.js", "/ace/src/mode-html.js"]
+
+
+- form_for [:admin, @snippet], :html => {'data-onsubmit_status' => onsubmit_status(@snippet)} do |f|
+  = f.hidden_field :lock_version
+  = render_region :form_top, :locals => {:f => f}
+  .form_area
+    - render_region :form, :locals => {:f => f} do |form|
+      - form.edit_title do
+        %p.title
+          = f.label :name, t('name')
+          = f.text_field :name, :class => 'textbox activate', :maxlength => 100
+      - form.edit_content do
+        %p.content
+          = f.label :content, t('body') 
+          ~ f.text_area :content, "data-bespinoptions"=>'{ "tabstop": 2, "stealFocus":true, "syntax": "html" }', :class => "textarea large bespin", :style => "width: 100%; height:500px;"
+      - form.edit_filter do
+        .set
+          %p
+            = f.label :filter_id, t('filter')
+            = f.select :filter_id, filter_options_for_select(f.object.filter_id), :id => 'snippet_filter'
+            %span.reference_links
+              == #{t('reference')}:
+              %span{:id => "filter_reference_link"}
+                = link_to_function t('filter'), "loadFilterReference();"
+              %span{:id => "tag_reference_link"}
+                = link_to_function t('available_tags'), "loadTagReference('Page');"
+  - render_region :form_bottom, :locals => {:f => f} do |form_bottom|
+    - form_bottom.edit_buttons do
+      %p.buttons{:style=>"clear: left"}
+        = save_model_button(@snippet)
+        = save_model_and_continue_editing_button(@snippet)
+        = t('or')
+        = link_to t('cancel'), admin_snippets_url
+    - form_bottom.edit_timestamp do
+      = updated_stamp @snippet

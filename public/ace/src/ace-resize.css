@@ -1,0 +1,20 @@
+body, #page { float : left !important; }
+#page {
+	position: absolute;
+	width: 100%;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+div.popup_window { z-index : 50; }
+
+pre.maximised { 
+	margin: 0px;
+	position: relative;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	z-index:100;
+}

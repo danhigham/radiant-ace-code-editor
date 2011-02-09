@@ -1,0 +1,27 @@
+-ActionView::Base.send :include, Admin::AceHelper
+
+-filter = page_part.filter
+-layout = page_part.page.nil? ? "text/html" : page_part.page.layout.content_type
+=filter.description
+=init_script("editor_part_#{page_part.name.to_slug}_content", "part_#{page_part.name.to_slug}_content", layout, filter)
+
+.page{:id => "page_#{page_part.name.to_slug}", 'data-caption'=>h(page_part.name)}
+  .part{:id => "part-#{page_part.name.to_slug}"}
+    = hidden_field_tag "page[parts_attributes][#{page_part_counter}][name]", page_part.name, :id => "part_#{page_part.name.to_slug}_name"
+    = hidden_field_tag "page[parts_attributes][#{page_part_counter}][id]", page_part.id, :id => "part_#{page_part_counter}_id", :class => "id_input" unless page_part.new_record?
+    = hidden_field_tag "page[parts_attributes][#{page_part_counter}][_destroy]", page_part._destroy, :class => "delete_input"
+    %p
+      %label{:for => "part_#{page_part.name.to_slug}_filter_id"} 
+        = t('filter') 
+      = select_tag "page[parts_attributes][#{page_part_counter}][filter_id]", filter_options_for_select(page_part.filter_id), :id => "part_#{page_part.name.to_slug}_filter_id"
+      %span.reference_links
+        = t('reference')
+        %span{:id => "filter_reference_link_#{page_part.name.to_slug}"}
+          = link_to_function t('filter'), "loadFilterReference('#{page_part.name.to_slug}');"
+        %span{:id => "tag_reference_link_#{page_part.name.to_slug}"}
+          = link_to_function t('available_tags'), "loadTagReference('#{page_part.name.to_slug}');"
+      = render_region :part_controls, :locals => {:page_part => page_part}
+    %div
+      %pre{:id => "editor_part_#{page_part.name.to_slug}_content", :style => "margin: 0;height : 400px; position:relative; top: 0; left :0; right : 0; bottom : 0;"}		
+
+      ~ text_area_tag "page[parts_attributes][#{page_part_counter}][content]", page_part.content, :class => "textarea large", :style => "display:none; width:100%; ", :id => "part_#{page_part.name.to_slug}_content"
