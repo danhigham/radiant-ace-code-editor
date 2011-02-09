@@ -1,7 +1,5 @@
 -ActionView::Base.send :include, Admin::AceHelper
-
--filter = page_part.filter
--layout = page_part.page.nil? ? "text/html" : page_part.page.layout.content_type
+=init_script("layout-editor", "layout-textarea", @layout.content_type, nil)
 
 - form_for [:admin, @layout], :html => {'data-onsubmit_status' => onsubmit_status(@layout)} do |f|
   = f.hidden_field :lock_version
@@ -25,7 +23,9 @@
       - form.edit_content do
         %p.content
           = f.label :layout_content, "Body"
-          ~ f.text_area :content, "data-bespinoptions"=>'{ "tabstop": 2, "stealFocus":true, "syntax": "html" }', :class => "textarea large bespin", :size => "40x20", :style => "width: 100%; height:500px;"
+          %pre.editor{	:id => "layout-editor" }
+          ~ f.text_area :content, :size => "40x20", :style => "display:none;", :class => "textarea large", :id => 'layout-textarea'
+
   = javascript_tag "$('layout_name').activate()"
   - render_region :form_bottom, :locals => {:f => f} do |form_bottom|
     - form_bottom.reference_links do

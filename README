@@ -1,8 +1,5 @@
-= Mozilla Skywriter
+= Radiant Ace Code Editor
 
-Radiant extension to accommodate Mozilla SkyWriter.
+Radiant extension to accommodate Radiant Ace Code Editor
 
-Few things to note about this;
-
-1) Due to an incompatibility between SkyWriter and Prototype 1.6.1, this extension will upgrade prototype to edge
-2) This extension also replaces the application layout for admin, to place a link tag in the head
+Top tip : hold down ctrl+enter for a full screen mode!

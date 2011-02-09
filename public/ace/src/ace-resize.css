@@ -18,3 +18,5 @@ pre.maximised {
 	bottom: 0px;
 	z-index:100;
 }
+
+pre.editor { margin: 0; position:relative; top: 0; left :0; right : 0; bottom : 0; }

@@ -1,5 +1,7 @@
-- @javascripts << ["/ace/src/ace.js", "/ace/src/theme-twilight.js", "/ace/src/mode-html.js"]
+-ActionView::Base.send :include, Admin::AceHelper
 
+-filter = @snippet.filter
+=init_script("snippet-editor", "snippet-textarea", 'text/html', filter)
 
 - form_for [:admin, @snippet], :html => {'data-onsubmit_status' => onsubmit_status(@snippet)} do |f|
   = f.hidden_field :lock_version
@@ -13,7 +15,8 @@
       - form.edit_content do
         %p.content
           = f.label :content, t('body') 
-          ~ f.text_area :content, "data-bespinoptions"=>'{ "tabstop": 2, "stealFocus":true, "syntax": "html" }', :class => "textarea large bespin", :style => "width: 100%; height:500px;"
+          %pre.editor{ :id => "snippet-editor" }
+          ~ f.text_area :content, :class => "textarea large", :style => "display:none;", :id=> 'snippet-textarea'
       - form.edit_filter do
         .set
           %p
