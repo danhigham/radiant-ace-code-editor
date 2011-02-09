@@ -2,4 +2,8 @@
 
 Radiant extension to accommodate Radiant Ace Code Editor
 
-Top tip : hold down ctrl+enter for a full screen mode!
+* Whilst editing files using ACE, hit ctrl+enter to switch between normal and full screen mode!
+* Fluid layout that expands edit area to the height of the page, great for portrait displays
+* Use my CoffeeScript filter and get syntax highlighted CoffeeScript code!
+
+TODO : Support for multiple editors / tabs, currently switching tabs then refreshing the page works!
