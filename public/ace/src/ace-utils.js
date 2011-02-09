@@ -10,7 +10,9 @@ function init_editor(tag_id, text_area_id, mode_path) {
     
 	editorSession.setMode(new EditorMode());
     editorSession.setValue(textArea.value);
-    
+    editorSession.setTabSize(2);
+	editorSession.setUseSoftTabs(true);
+	
 	editorSession.on('change', function() { 
 		textArea.value = editorSession.toString();
 	});
