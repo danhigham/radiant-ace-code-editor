@@ -16,6 +16,8 @@ function init_editor(tag_id, text_area_id, mode_path) {
 	editorSession.on('change', function() { 
 		textArea.value = editorSession.toString();
 	});
+	
+	editor.renderer.showCursor();
 }
 
 function switchFullScreen(tag_id, text_area_id, mode_path) {
