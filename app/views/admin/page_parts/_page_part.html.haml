@@ -1,7 +1,7 @@
 -ActionView::Base.send :include, Admin::AceHelper
 
 -filter = page_part.filter
--layout = page_part.page.nil? ? "text/html" : page_part.page.layout.content_type
+-layout = content_type_for_page(page_part)
 
 =init_script("editor_part_#{page_part.name.to_slug}_content", "part_#{page_part.name.to_slug}_content", layout, filter)
 

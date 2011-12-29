@@ -2,6 +2,19 @@ module Admin::AceHelper
   include Admin::NodeHelper
   include Admin::ReferencesHelper
 
+  def content_type_for_page(page_part)
+    default_content_type = "text/html"
+    if page_part.page.nil?
+      return default_content_type
+    else
+      if page_part.page.layout.respond_to?(:content_type)
+        return page_part.page.layout.content_type
+      else
+        return default_content_type
+      end
+    end
+  end
+  
   def init_script(tag_id, text_area_id, content_type, filter)
     @javascripts << ["/ace/src/ace.js", "/ace/src/ace-utils.js", "/ace/src/theme-twilight.js", "/ace/src/theme-textmate.js", "/ace/src/mode-html.js", "/ace/src/mode-css.js", "/ace/src/mode-coffee.js", "/ace/src/mode-javascript.js"]
     @stylesheets << ["/ace/src/ace-resize.css"]
